@@ -10,7 +10,7 @@ const app = express()
 
 // Middleware
 app.use(cors({
-  origin: '*',
+  origin: 'https://serap-hair-studio.onrender.com',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
