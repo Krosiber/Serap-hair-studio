@@ -210,7 +210,7 @@ const Hizmetler: NextPage<Props> = ({ hizmetler }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
     try {
-        const response = await axios.get('http://localhost:5000/api/hizmetler');
+        const response = await axios.get('https://serap-hair-studio.onrender.com/api/hizmetler');
         return {
             props: {
                 hizmetler: response.data

@@ -129,7 +129,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('http://localhost:5000/api/verify-token', {
+      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },

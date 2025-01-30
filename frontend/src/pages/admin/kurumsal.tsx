@@ -26,7 +26,7 @@ const KurumsalYonetimi = () => {
   // Verileri getir
   const getKurumsal = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/kurumsal');
+      const response = await axios.get('https://serap-hair-studio.onrender.com/api/kurumsal');
       if (response.status === 200) {
         const data = response.data;
         setKurumsal(data);
@@ -48,7 +48,7 @@ const KurumsalYonetimi = () => {
   // Form işlemleri
   const handleSubmit = async () => {
     try {
-      await axios.put('http://localhost:5000/api/kurumsal/update', formData);
+      await axios.put('https://serap-hair-studio.onrender.com/api/kurumsal/update', formData);
       toast.success('Kurumsal bilgiler başarıyla güncellendi!');
       getKurumsal();
     } catch {
@@ -64,7 +64,7 @@ const KurumsalYonetimi = () => {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('http://localhost:5000/api/upload', formData, {
+        const response = await axios.post('https://serap-hair-studio.onrender.com/api/upload', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         setFormData(prev => ({ ...prev, imgUrl: response.data.url }));
@@ -216,7 +216,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('http://localhost:5000/api/verify-token', {
+      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },

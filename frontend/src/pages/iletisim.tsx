@@ -16,7 +16,7 @@ const Contact = () => {
   const contactSubmit = async(e:FormEvent) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/api/contact',{name,surname,phone,email,message})
+      const response = await axios.post('https://serap-hair-studio.onrender.com/api/contact',{name,surname,phone,email,message})
       toast.success('İletişim Bilgileri Gönderildi')
       console.log(response)
     } catch (error:unknown) {

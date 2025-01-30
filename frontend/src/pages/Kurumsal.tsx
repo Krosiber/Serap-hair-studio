@@ -47,7 +47,7 @@ const Kurumsal: NextPage<Props> = ({ kurumsal }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
     try {
-        const response = await axios.get('http://localhost:5000/api/kurumsal');
+        const response = await axios.get('https://serap-hair-studio.onrender.com/api/kurumsal');
         return {
             props: {
                 kurumsal: response.data

@@ -19,7 +19,7 @@ const AnasayfaYonetimi = () => {
   const [editingItem, setEditingItem] = useState<GaleriItem | null>(null);
 
   const getGaleri = async () => {
-    const response = await axios.get('http://localhost:5000/api/galeri');
+    const response = await axios.get('https://serap-hair-studio.onrender.com/api/galeri');
     setGaleri(response.data);
   }
 
@@ -35,7 +35,7 @@ const AnasayfaYonetimi = () => {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('http://localhost:5000/api/upload', formData, {
+        const response = await axios.post('https://serap-hair-studio.onrender.com/api/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -56,7 +56,7 @@ const AnasayfaYonetimi = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/galeriadd', {
+      const response = await axios.post('https://serap-hair-studio.onrender.com/api/galeriadd', {
         resimUrl
       });
       
@@ -72,7 +72,7 @@ const AnasayfaYonetimi = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm('Bu öğeyi silmek istediğinize emin misiniz?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/galeri/${id}`);
+        await axios.delete(`https://serap-hair-studio.onrender.com/api/galeri/${id}`);
         getGaleri();
         toast.success('Öğe başarıyla silindi');
       } catch (error) {
@@ -92,7 +92,7 @@ const AnasayfaYonetimi = () => {
     if (!editingItem) return;
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/galeri/${editingItem._id}`, {
+      const response = await axios.put(`https://serap-hair-studio.onrender.com/api/galeri/${editingItem._id}`, {
         resimUrl: resimUrl
       });
       
@@ -244,7 +244,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('http://localhost:5000/api/verify-token', {
+      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },

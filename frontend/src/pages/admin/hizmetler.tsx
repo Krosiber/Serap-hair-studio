@@ -23,7 +23,7 @@ const HizmetlerYonetimi = () => {
   // Hizmetleri getir
   const getHizmetler = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/hizmetler');
+      const response = await axios.get('https://serap-hair-studio.onrender.com/api/hizmetler');
       setHizmetler(response.data);
     } catch (error:unknown) {
       console.error('Hizmetler getirilemedi:', error);
@@ -42,7 +42,7 @@ const HizmetlerYonetimi = () => {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('http://localhost:5000/api/upload', formData, {
+        const response = await axios.post('https://serap-hair-studio.onrender.com/api/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -59,7 +59,7 @@ const HizmetlerYonetimi = () => {
     e.preventDefault();
     try {
       if (editingHizmet) {
-        const response = await axios.put(`http://localhost:5000/api/hizmet/${editingHizmet._id}`, {
+        const response = await axios.put(`https://serap-hair-studio.onrender.com/api/hizmet/${editingHizmet._id}`, {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
@@ -67,7 +67,7 @@ const HizmetlerYonetimi = () => {
         setHizmetler(response.data);
         toast.success('Hizmet başarıyla güncellendi!');
       } else {
-        const response = await axios.post('http://localhost:5000/api/hizmetadd', {
+        const response = await axios.post('https://serap-hair-studio.onrender.com/api/hizmetadd', {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
@@ -253,7 +253,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('http://localhost:5000/api/verify-token', {
+      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },
