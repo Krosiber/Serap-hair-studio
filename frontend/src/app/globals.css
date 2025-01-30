@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.bgsss{
+    background-color: rgb(21,21,21)
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #a44246 #151515;
+    scroll-behavior: smooth;
+}
+
+
+body{
+    margin:0 auto;
+    max-width:2500px;
+}
+
+

@@ -1,0 +1,15 @@
+[
+    {
+        "idj": 6,
+        "foto": "Fotoğraflarımız",
+        "Videolarımız": "Videolarımız",
+        "img1": "/images/Anasayfa/hair.png",
+        "img2": "/images/Anasayfa/hair2.png",
+        "img3": "/images/Anasayfa/hair3.png",
+        "img4": "/images/Anasayfa/hair4.png",
+        "vd1": "/videos/bir.mp4",
+        "vd2": "/videos/iki.mp4",
+        "vd3": "/videos/uc.mp4",
+        "vd4": "/videos/dort.mp4"
+    }
+]
