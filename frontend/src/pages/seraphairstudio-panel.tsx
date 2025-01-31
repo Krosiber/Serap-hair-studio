@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -12,8 +12,19 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
-    const handleSubmit = async()=>{
+    useEffect(() => {
+        const token = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('accessToken='))
+            ?.split('=')[1];
 
+        if (token) {
+            router.push('/admin');
+        }
+    }, [router]);
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
         setIsLoading(true)
 
         try {
