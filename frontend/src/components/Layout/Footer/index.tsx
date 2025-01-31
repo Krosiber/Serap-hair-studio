@@ -39,7 +39,7 @@ const Footer = () => {
                 <div>
                     <h2 className="pb-4 text-xl font-semibold">Çalışma Saatleri</h2>
                     <div className="font-light">
-                        <p>Sali - Pazar: 09:30 - 20:30</p>
+                        <p>Salı - Pazar: 09:30 - 20:30</p>
                         <p>Pazartesi: Kapalı</p>
                     </div>
                 </div>
