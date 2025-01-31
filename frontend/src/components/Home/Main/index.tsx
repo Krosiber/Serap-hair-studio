@@ -153,7 +153,7 @@ const Anasayfa: React.FC = () => {
         </div>
         <div className='flex flex-wrap justify-center pb-[10rem] w-full max-lg:gap-5'>
           {galeriItems.map((item: GaleriItem) => (
-            <img
+            <Image
               key={item._id}
               src={item.resimUrl}
               alt="Galeri Resmi"
