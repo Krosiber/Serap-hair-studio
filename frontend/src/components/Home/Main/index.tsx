@@ -180,7 +180,7 @@ const Anasayfa: React.FC = () => {
       </div>
 
       <section className='flex justify-center'>
-        <form onSubmit={userComment} className="flex    gap-3 bg-[rgb(30,30,30)] p-3 rounded-md shadow-md ">
+        <form onSubmit={userComment} className="flex flex-wrap    gap-3 bg-[rgb(30,30,30)] p-3 rounded-md shadow-md ">
           <div className="w-24">
             <label htmlFor="inputName" className="text-white text-xs font-semibold block mb-1">Ad:</label>
             <input
