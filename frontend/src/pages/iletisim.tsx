@@ -13,8 +13,8 @@ const Contact = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
 
-  const contactSubmit = async(e:FormEvent) => {
-    e.preventDefault()
+  const contactSubmit = async() => {
+
     try {
       const response = await axios.post('https://serap-hair-studio.onrender.com/api/contact',{name,surname,phone,email,message})
       toast.success('İletişim Bilgileri Gönderildi')

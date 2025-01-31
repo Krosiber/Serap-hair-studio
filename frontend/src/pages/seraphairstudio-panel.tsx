@@ -12,8 +12,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
-    const handleSubmit = async(e:FormEvent)=>{
-        e.preventDefault()
+    const handleSubmit = async()=>{
+
         setIsLoading(true)
 
         try {

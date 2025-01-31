@@ -56,7 +56,7 @@ const HizmetlerYonetimi = () => {
 
   // Form işlemleri
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    
     try {
       if (editingHizmet) {
         const response = await axios.put(`https://serap-hair-studio.onrender.com/api/hizmet/${editingHizmet._id}`, {

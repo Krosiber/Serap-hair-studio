@@ -106,8 +106,8 @@ const Anasayfa: React.FC = () => {
     fetchGaleri();
 
   }, []);
-  const userComment = async (e:FormEvent) => {
-    e.preventDefault()
+  const userComment = async () => {
+    
     try {
       await axios.post('https://serap-hair-studio.onrender.com/api/comment', { 
         name, 
