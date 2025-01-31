@@ -155,7 +155,7 @@ const Anasayfa: React.FC = () => {
           {galeriItems.map((item: GaleriItem) => (
             <Image
               key={item._id}
-              src={item.resimUrl}
+              src={`https://serap-hair-studio.onrender.com/${item.resimUrl}`}
               alt="Galeri Resmi"
               className="pr-3 hover:opacity-60 max-sm:w-[20rem] max-sm:h-[25rem]"
               width={350}
