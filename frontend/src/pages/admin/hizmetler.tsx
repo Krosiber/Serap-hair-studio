@@ -56,39 +56,42 @@ const HizmetlerYonetimi = () => {
   };
 
   // Form işlemleri
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault(); // Form submit'i engelleyelim
     
     try {
       if (editingHizmet) {
-        const response = await axios.put(`https://serap-hair-studio.onrender.com/api/hizmet/${editingHizmet._id}`, {
+        // Güncelleme işlemi
+        await axios.put(`https://serap-hair-studio.onrender.com/api/hizmet/${editingHizmet._id}`, {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
         });
-        setHizmetler(response.data);
+        
+        // Güncellemeden sonra listeyi yenile
+        await getHizmetler();
+        
         toast.success('Hizmet başarıyla güncellendi!');
+        resetForm();
       } else {
-        const response = await axios.post('https://serap-hair-studio.onrender.com/api/hizmetadd', {
+        // Yeni hizmet ekleme
+        await axios.post('https://serap-hair-studio.onrender.com/api/hizmetadd', {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
         });
-        setHizmetler(response.data);
+        
+        // Eklemeden sonra listeyi yenile
+        await getHizmetler();
+        
         toast.success('Hizmet başarıyla eklendi!');
+        resetForm();
       }
-      resetForm();
     } catch (error:unknown) {
       console.error('İşlem hatası:', error);
       toast.error('İşlem sırasında bir hata oluştu');
     }
   };
-
-  const success = (e:FormEvent)=>{
-    e.preventDefault()
-    toast.success('Hizmet başarıyla ayarlandi!');
-  }
-
-
 
   // Düzenleme işlemi
   const handleEdit = (hizmet: Hizmet) => {
@@ -233,7 +236,6 @@ const HizmetlerYonetimi = () => {
                   </button>
                   <button 
                     type="submit"
-                    onClick={success}
                     className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                   >
                     {editingHizmet ? 'Güncelle' : 'Kaydet'}
