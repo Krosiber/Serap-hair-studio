@@ -55,7 +55,7 @@ const HizmetlerYonetimi = () => {
   };
 
   // Form işlemleri
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async () => {
     
     try {
       if (editingHizmet) {

@@ -48,7 +48,7 @@ const AnasayfaYonetimi = () => {
   };
 
   const createGaleriItem = async (e: React.FormEvent<HTMLFormElement>) => {
-    
+    e.preventDefault()
     if (!resimUrl) {
       toast.warning('Lütfen resim ekleyin');
       return;
@@ -87,6 +87,7 @@ const AnasayfaYonetimi = () => {
   };
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
 
     if (!editingItem) return;
 

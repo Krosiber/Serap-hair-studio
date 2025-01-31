@@ -23,8 +23,8 @@ const Login = () => {
         }
     }, [router]);
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
+
         setIsLoading(true)
 
         try {
@@ -32,9 +32,6 @@ const Login = () => {
                 { username, password },
                 { 
                     withCredentials: true,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
                 }
             );
 

@@ -107,7 +107,6 @@ const Anasayfa: React.FC = () => {
 
   }, []);
   const userComment = async () => {
-    
     try {
       await axios.post('https://serap-hair-studio.onrender.com/api/comment', { 
         name, 
@@ -152,19 +151,16 @@ const Anasayfa: React.FC = () => {
           <h1>{data.foto}</h1>
         </div>
         <div className='flex flex-wrap justify-center pb-[10rem] w-full max-lg:gap-5'>
-          {galeriItems.map((item: GaleriItem) => {
-            console.log('Cloudinary Resim URL:', item.resimUrl);
-            return (
-              <Image
-                key={item._id}
-                src={item.resimUrl}
-                alt="Galeri Resmi"
-                className="pr-3 hover:opacity-60 max-sm:w-[20rem] max-sm:h-[25rem]"
-                width={350}
-                height={350}
-              />
-            );
-          })}
+          {galeriItems.map((item: GaleriItem) => (
+            <Image
+              key={item._id}
+              src={item.resimUrl}
+              alt="Galeri Resmi"
+              className="pr-3 hover:opacity-60 max-sm:w-[20rem] max-sm:h-[25rem]"
+              width={350}
+              height={350}
+            />
+          ))}
         </div>
       </section>
       <section>
