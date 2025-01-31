@@ -86,11 +86,18 @@ const HizmetlerYonetimi = () => {
 
   // Düzenleme işlemi
   const handleEdit = (hizmet: Hizmet) => {
-    setEditingHizmet(hizmet);
-    setHizmetBaslik(hizmet.baslik);
-    setHizmetAciklama(hizmet.aciklama);
-    setHizmetResim(hizmet.resimUrl);
-    setHizmetEkle(true);
+try {
+      setEditingHizmet(hizmet);
+      setHizmetBaslik(hizmet.baslik);
+      setHizmetAciklama(hizmet.aciklama);
+      setHizmetResim(hizmet.resimUrl);
+      setHizmetEkle(true);
+      toast.success('Hizmet başarıyla düzenlendi!');
+} catch (error) {
+  console.log(error)
+  toast.error('Hizmet düzenlenirken bir hata oluştu!');
+  
+}
   };
 
   // Formu sıfırla
