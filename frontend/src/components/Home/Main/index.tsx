@@ -1,5 +1,5 @@
 "use client"
-import React, {  useEffect, useState } from 'react';
+import React, {  FormEvent, useEffect, useState } from 'react';
 import Loading from '@/app/loading';
 import axios from 'axios';
 import { CiStar } from "react-icons/ci";
@@ -61,7 +61,7 @@ const Anasayfa: React.FC = () => {
   const [surname, setSurname] = useState(``)
   const [comment, setComment] = useState(``)
   const [star, setStar] = useState(0)
-  const [like] = useState(0)
+  const [like, setLike] = useState(0)
   const [datacomment, setDatacomment] = useState<fetchveri[]>([])
 
   useEffect(() => {
@@ -106,7 +106,8 @@ const Anasayfa: React.FC = () => {
     fetchGaleri();
 
   }, []);
-  const userComment = async () => {
+  const userComment = async (e:FormEvent) => {
+    e.preventDefault()
     try {
       await axios.post('https://serap-hair-studio.onrender.com/api/comment', { 
         name, 
@@ -117,6 +118,11 @@ const Anasayfa: React.FC = () => {
       });
       toast.success('Yorum başarıyla Eklendi');
 
+      setName('');
+      setSurname('');
+      setComment('');
+      setStar(0);
+      setLike(0);
       console.log('Successful');
     } catch (error) {
       toast.error('Yorum eklenirken bir hata oluştu!');

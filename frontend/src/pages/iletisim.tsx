@@ -2,7 +2,7 @@ import Layout from "../components/Layout/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './tailwind.css';
 import axios from "axios";
-import {  useState } from "react";
+import {  useState, FormEvent } from "react";
 import {toast,ToastContainer} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 const Contact = () => {
@@ -13,12 +13,19 @@ const Contact = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
 
-  const contactSubmit = async() => {
+  const contactSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
     try {
-      const response = await axios.post('https://serap-hair-studio.onrender.com/api/contact',{name,surname,phone,email,message})
+      await axios.post('https://serap-hair-studio.onrender.com/api/contact',{name,surname,phone,email,message})
       toast.success('İletişim Bilgileri Gönderildi')
-      console.log(response)
+      
+      setName('');
+      setSurname('');
+      setPhone('');
+      setEmail('');
+      setMessage('');
+      
     } catch (error:unknown) {
       console.log(error)
       toast.error('İletişim Bilgileri Gönderilemedi!')
