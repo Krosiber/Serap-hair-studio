@@ -2,7 +2,7 @@ import Layout from "../components/Layout/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './tailwind.css';
 import axios from "axios";
-import { FormEvent, useState } from "react";
+import {  useState } from "react";
 import {toast,ToastContainer} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 const Contact = () => {

@@ -1,5 +1,5 @@
 "use client"
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import Loading from '@/app/loading';
 import axios from 'axios';
 import { CiStar } from "react-icons/ci";

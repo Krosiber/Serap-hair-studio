@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
