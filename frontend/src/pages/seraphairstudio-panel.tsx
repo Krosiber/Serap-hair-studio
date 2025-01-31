@@ -32,6 +32,9 @@ const Login = () => {
                 { username, password },
                 { 
                     withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 }
             );
 
@@ -45,7 +48,7 @@ const Login = () => {
                 });
             }
         } catch (error: unknown) {
-            console.log(error)
+            console.log(error);
             toast.error('Kullanıcı adı veya şifre hatalı!');
         } finally {
             setIsLoading(false);
