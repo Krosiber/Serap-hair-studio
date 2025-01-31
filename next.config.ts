@@ -2,8 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['serap-hair-studio.onrender.com'], // remotePatterns yerine domains kullanalım
+    domains: [
+      'res.cloudinary.com',
+      'serap-hair-studio.onrender.com'
+    ],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'serap-hair-studio.onrender.com',
