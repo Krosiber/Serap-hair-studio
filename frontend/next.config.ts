@@ -6,10 +6,9 @@ const nextConfig: NextConfig = {
     domains: ['localhost'],
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '5000',
-        pathname: '/uploads/**',
+        protocol: 'https',
+        hostname: 'serap-hair-studio.onrender.com',
+    
       },
     ],
   },
