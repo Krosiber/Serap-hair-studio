@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import AdminLayout from './layoutpage';
 import "../tailwind.css"
 import axios from 'axios';
@@ -34,6 +34,7 @@ const HizmetlerYonetimi = () => {
     getHizmetler();
   }, []);
 
+  
   // Resim yükleme işlemi
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -82,22 +83,23 @@ const HizmetlerYonetimi = () => {
     }
   };
 
+  const success = (e:FormEvent)=>{
+    e.preventDefault()
+    toast.success('Hizmet başarıyla ayarlandi!');
+  }
+
 
 
   // Düzenleme işlemi
   const handleEdit = (hizmet: Hizmet) => {
-try {
-      setEditingHizmet(hizmet);
+          setEditingHizmet(hizmet);
       setHizmetBaslik(hizmet.baslik);
       setHizmetAciklama(hizmet.aciklama);
       setHizmetResim(hizmet.resimUrl);
       setHizmetEkle(true);
-      toast.success('Hizmet başarıyla düzenlendi!');
-} catch (error) {
-  console.log(error)
-  toast.error('Hizmet düzenlenirken bir hata oluştu!');
-  
-}
+      
+
+
   };
 
   // Formu sıfırla
@@ -231,6 +233,7 @@ try {
                   </button>
                   <button 
                     type="submit"
+                    onClick={success}
                     className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                   >
                     {editingHizmet ? 'Güncelle' : 'Kaydet'}
