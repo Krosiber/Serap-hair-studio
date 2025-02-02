@@ -79,7 +79,7 @@ const Anasayfa: React.FC = () => {
 
     const fetchData2 = async () => {
       try {
-        const response = await axios.get('https://serap-hair-studio.onrender.com/api/comment');
+        const response = await axios.get('https://serap.alwaysdata.net/comment');
         setDatacomment(response.data)
 
 
@@ -92,7 +92,7 @@ const Anasayfa: React.FC = () => {
 
     const fetchGaleri = async () => {
       try {
-        const response = await axios.get('https://serap-hair-studio.onrender.com/api/galeri');
+        const response = await axios.get('https://serap.alwaysdata.net/galeri');
         setGaleriItems(response.data);
       } catch (error) {
         console.error('Galeri yüklenirken hata:', error);
@@ -109,7 +109,7 @@ const Anasayfa: React.FC = () => {
   const userComment = async (e:FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post('https://serap-hair-studio.onrender.com/api/comment', { 
+      await axios.post('https://serap.alwaysdata.net/comment', { 
         name, 
         surname, 
         comment, 
@@ -132,9 +132,9 @@ const Anasayfa: React.FC = () => {
 
   const handleLike = async (commentId: string) => {
     try {
-      await axios.post(`https://serap-hair-studio.onrender.com/api/comment/${commentId}/like`);
+      await axios.post(`https://serap.alwaysdata.net/comment/${commentId}/like`);
       // Yorumları yeniden yükle
-      const updatedComments = await axios.get('https://serap-hair-studio.onrender.com/api/comment');
+      const updatedComments = await axios.get('https://serap.alwaysdata.net/comment');
       setDatacomment(updatedComments.data);
     } catch (error) {
       console.error('Like error:', error);
