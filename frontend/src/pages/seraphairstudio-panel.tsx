@@ -28,7 +28,7 @@ const Login = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.post('https://serap-hair-studio.onrender.com/api/login',
+            const response = await axios.post('https://serap.alwaysdata.net/login',
                 { username, password },
                 {
                     withCredentials: true,

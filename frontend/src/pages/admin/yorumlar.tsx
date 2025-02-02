@@ -20,7 +20,7 @@ const Yorumlar = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get('https://serap-hair-studio.onrender.com/api/comment');
+      const response = await axios.get('https://serap.alwaysdata.net/comment');
       setComments(response.data);
     } catch (error:unknown) {
       console.log(error)
@@ -34,7 +34,7 @@ const Yorumlar = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`https://serap-hair-studio.onrender.com/api/comment/${id}`);
+      await axios.delete(`https://serap.alwaysdata.net/comment/${id}`);
       toast.success('Yorum başarıyla silindi');
       fetchComments(); // Şimdi fetchComments'e erişebilir
     } catch (error:unknown) {
@@ -99,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   
     try {
-        await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
+        await axios.get('https://serap.alwaysdata.net/verify-token', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

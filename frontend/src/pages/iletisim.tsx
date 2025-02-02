@@ -17,7 +17,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      await axios.post('https://serap-hair-studio.onrender.com/api/contact',{name,surname,phone,email,message})
+      await axios.post('https://serap.alwaysdata.net/contact',{name,surname,phone,email,message})
       toast.success('İletişim Bilgileri Gönderildi')
       
       setName('');

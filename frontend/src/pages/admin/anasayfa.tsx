@@ -92,7 +92,7 @@ const AnasayfaYonetimi = () => {
     if (!editingItem) return;
 
     try {
-      const response = await axios.put(`https://serap-hair-studio.onrender.com/api/galeri/${editingItem._id}`, {
+      const response = await axios.put(`https://serap.alwaysdata.net/galeri/${editingItem._id}`, {
         resimUrl: resimUrl
       });
       
@@ -244,7 +244,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
+      await axios.get('https://serap.alwaysdata.net/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },

@@ -23,7 +23,7 @@ const HizmetlerYonetimi = () => {
   // Hizmetleri getir
   const getHizmetler = async () => {
     try {
-      const response = await axios.get('https://serap-hair-studio.onrender.com/api/hizmetler');
+      const response = await axios.get('https://serap.alwaysdata.net/hizmetler');
       setHizmetler(response.data);
     } catch (error:unknown) {
       console.error('Hizmetler getirilemedi:', error);
@@ -43,7 +43,7 @@ const HizmetlerYonetimi = () => {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('https://serap-hair-studio.onrender.com/api/upload', formData, {
+        const response = await axios.post('https://serap.alwaysdata.net/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -62,7 +62,7 @@ const HizmetlerYonetimi = () => {
     try {
       if (editingHizmet) {
         // Güncelleme işlemi
-        await axios.put(`https://serap-hair-studio.onrender.com/api/hizmet/${editingHizmet._id}`, {
+        await axios.put(`https://serap.alwaysdata.net/hizmet/${editingHizmet._id}`, {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
@@ -75,7 +75,7 @@ const HizmetlerYonetimi = () => {
         resetForm();
       } else {
         // Yeni hizmet ekleme
-        await axios.post('https://serap-hair-studio.onrender.com/api/hizmetadd', {
+        await axios.post('https://serap.alwaysdata.net/hizmetadd', {
           baslik: hizmetBaslik,
           aciklama: hizmetAciklama,
           resimUrl: hizmetResim
@@ -265,7 +265,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-      await axios.get('https://serap-hair-studio.onrender.com/api/verify-token', {
+      await axios.get('https://serap.alwaysdata.net/verify-token', {
           headers: {
               Authorization: `Bearer ${token}`,
           },

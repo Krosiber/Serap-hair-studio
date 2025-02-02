@@ -3,8 +3,12 @@ import cors from "cors"
 import dotenv from "dotenv"
 import { connectDB } from "./config/mongoose"
 import apiRoutes from "./routes/route"
+import fs from "fs"
 
-dotenv.config()
+if (fs.existsSync('.env')) {
+  dotenv.config()
+}
+
 
 const app = express()
 
@@ -18,7 +22,7 @@ app.use(cors({
 app.use(express.json())
 
 // Routes
-app.use('/api', apiRoutes)
+app.use(apiRoutes)
 app.use('/uploads', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
@@ -27,8 +31,9 @@ app.use('/uploads', (req, res, next) => {
 // MongoDB bağlantısı
 connectDB()
 
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
+const PORT:any = process.env.PORT || 3000;
+const HOST = process.env.HOST || '::'; 
+app.listen(PORT,HOST, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
