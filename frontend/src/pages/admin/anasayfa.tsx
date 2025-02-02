@@ -19,7 +19,7 @@ const AnasayfaYonetimi = () => {
   const [editingItem, setEditingItem] = useState<GaleriItem | null>(null);
 
   const getGaleri = async () => {
-    const response = await axios.get('https://serap-hair-studio.onrender.com/api/galeri');
+    const response = await axios.get('https://serap.alwaysdata.net/galeri');
     setGaleri(response.data);
   }
 
@@ -35,7 +35,7 @@ const AnasayfaYonetimi = () => {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('https://serap-hair-studio.onrender.com/api/upload', formData, {
+        const response = await axios.post('https://serap.alwaysdata.net/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -55,7 +55,7 @@ const AnasayfaYonetimi = () => {
     }
 
     try {
-      const response = await axios.post('https://serap-hair-studio.onrender.com/api/galeriadd', {
+      const response = await axios.post('https://serap.alwaysdata.net/galeriadd', {
         resimUrl
       });
       
@@ -71,7 +71,7 @@ const AnasayfaYonetimi = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm('Bu öğeyi silmek istediğinize emin misiniz?')) {
       try {
-        await axios.delete(`https://serap-hair-studio.onrender.com/api/galeri/${id}`);
+        await axios.delete(`https://serap.alwaysdata.net/galeri/${id}`);
         getGaleri();
         toast.success('Öğe başarıyla silindi');
       } catch (error) {
