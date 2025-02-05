@@ -146,7 +146,11 @@ const Anasayfa: React.FC = () => {
   }
 
   if (!data) {
-    return <div>Error loading data.</div>;
+    return <Loading/>
+  }
+
+  if(!galeriItems){
+    return <Loading/>
   }
 
   return (
