@@ -48,7 +48,7 @@ const Footer = () => {
         <div className="py-6 bgsss  border-t border-gray-800 ">
             <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center text-gray-400 px-4">
                 <div className="text-sm mb-4 sm:mb-0">
-                    <p>&copy; 2024 SerapHairStudio. Tüm Hakları Saklıdır</p>
+                    <p>&copy; 2025 SerapHairStudio. Tüm Hakları Saklıdır</p>
                 </div>
                 <div className="text-sm">
                     <a href="/gizlilik-politikasi" className="hover:text-gray-300 transition-colors duration-300">Gizlilik Politikası</a>
