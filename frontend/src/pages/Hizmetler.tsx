@@ -16,7 +16,7 @@ interface Props { hizmetler: Item[]; }
 
 /* ── Tema Sabitleri ─────────────────────────────────────────── */
 const C = {
-  bg:      '#0a0a0a',
+  bg:      '#0a0a0a', 
   surface: '#111111',
   card:    '#161616',
   border:  'rgba(255,255,255,0.07)',
@@ -133,7 +133,7 @@ const ServiceSection = ({
   );
 
   return (
-    <section style={{ background: C.surface, position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: C.bg, position: 'relative', overflow: 'hidden' }}>
       {/* Üst ince gold çizgi */}
       <div style={{
         position: 'absolute', top: 0,
