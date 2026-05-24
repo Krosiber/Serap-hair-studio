@@ -4,7 +4,6 @@ import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import Layout from "../components/Layout/Layout";
 import Loading from "@/app/loading";
-import { CSSProperties } from "react";
 
 interface Item {
   _id: string;
