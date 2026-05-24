@@ -175,7 +175,7 @@ const Anasayfa: React.FC = () => {
       </section>
       <section>
         <div className='text-center text-5xl text-white py-[5rem] max-sm:text-3xl'>
-          <h1>{data.Videolarımız} aaaaaaaaaaaaaa</h1>
+          <h1>{data.Videolarımız}</h1>
         </div>
         <div className='flex flex-wrap justify-center pb-[5rem] max-lg:gap-5 '>
           <video src={data.vd1} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
