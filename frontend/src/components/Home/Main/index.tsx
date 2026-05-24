@@ -1,11 +1,10 @@
 "use client"
-import React, {  FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loading from '@/app/loading';
 import axios from 'axios';
-import { CiStar } from "react-icons/ci";
-import {  ThumbsUp } from 'lucide-react';
-import { toast, ToastContainer } from 'react-toastify';
 import Image from 'next/image';
+
+/* ── Tip Tanımları ─────────────────────────────────────────── */
 interface Item {
   idj: number;
   foto: string;
@@ -15,270 +14,180 @@ interface Item {
   vd3: string;
   vd4: string;
 }
-
 interface GaleriItem {
   _id: string;
   resimUrl: string;
   createdAt: Date;
 }
 
-interface fetchveri {
-  _id: string,
-  name: string,
-  surname: string,
-  comment: string,
-  star: string,
-  like:number
-  createdAt: string
-}
+/* ── Tema Sabitleri ────────────────────────────────────────── */
+const C = {
+  bg:      '#0a0a0a',
+  surface: '#111111',
+  card:    '#161616',
+  border:  'rgba(255,255,255,0.07)',
+  gold:    '#C9A84C',
+  goldDim: 'rgba(201,168,76,0.12)',
+  text:    '#F9FAFB',
+  muted:   '#6B7280',
+  subtle:  '#9CA3AF',
+};
 
+/* ── Section Başlık Bileşeni ───────────────────────────────── */
+const SectionTitle = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+    <p style={{ margin: 0, fontSize: '0.6rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: C.gold, fontWeight: 500 }}>
+      Serap Hair Studio
+    </p>
+    <h2 style={{ margin: '0.6rem 0 0', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 200, color: C.text, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+      {children}
+    </h2>
+    <div style={{ margin: '1rem auto 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
+      <div style={{ width: '3rem', height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+      <div style={{ width: '5px', height: '5px', background: C.gold, transform: 'rotate(45deg)' }} />
+      <div style={{ width: '3rem', height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+    </div>
+  </div>
+);
+
+/* ── Responsive Style ──────────────────────────────────────── */
+const Styles = () => (
+  <style>{`
+    .galeri-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .galeri-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .galeri-item img {
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.85) saturate(0.9);
+    }
+    .galeri-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.65) saturate(0.8);
+    }
+    .galeri-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .video-wrapper {
+      position: relative;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: #161616;
+    }
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+    @media (max-width: 640px) {
+      .galeri-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .video-grid  { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    }
+  `}</style>
+);
+
+/* ── Ana Bileşen ───────────────────────────────────────────── */
 const Anasayfa: React.FC = () => {
-
-  const startveri = (star:string) => {
-    if (star == `1`) {
-      return (<span>⭐</span>)
-    }
-    else if (star == `2`) {
-      return (<span>⭐⭐</span>)
-
-    }
-    else if (star == `3`) {
-      return (<span>⭐⭐⭐</span>)
-
-    }
-    else if (star == `4`) {
-      return (<span>⭐⭐⭐⭐</span>)
-
-    }
-    else {
-      return (<span>⭐⭐⭐⭐⭐</span>)
-    }
-  }
   const [data, setData] = useState<Item | null>(null);
   const [galeriItems, setGaleriItems] = useState<GaleriItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [name, setName] = useState(``)
-  const [surname, setSurname] = useState(``)
-  const [comment, setComment] = useState(``)
-  const [star, setStar] = useState(0)
-  const [like, setLike] = useState(0)
-  const [datacomment, setDatacomment] = useState<fetchveri[]>([])
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/data/data.json');
-        const result = await response.json();
+        const res = await fetch('/data/data.json');
+        const result = await res.json();
         setData(result[0]);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch (e) {
+        console.error(e);
       } finally {
         setLoading(false);
       }
     };
-
-    const fetchData2 = async () => {
-      try {
-        const response = await axios.get('https://serap.alwaysdata.net/comment');
-        setDatacomment(response.data)
-
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-
-    };
-
-
     const fetchGaleri = async () => {
       try {
-        const response = await axios.get('https://serap.alwaysdata.net/galeri');
-        setGaleriItems(response.data);
-      } catch (error) {
-        console.error('Galeri yüklenirken hata:', error);
+        const res = await axios.get('https://serap.alwaysdata.net/galeri');
+        setGaleriItems(res.data);
+      } catch (e) {
+        console.error(e);
       }
     };
-
-
-
     fetchData();
-    fetchData2()
     fetchGaleri();
-
   }, []);
-  const userComment = async (e:FormEvent) => {
-    e.preventDefault()
-    try {
-      await axios.post('https://serap.alwaysdata.net/comment', { 
-        name, 
-        surname, 
-        comment, 
-        star, 
-        like
-      });
-      toast.success('Yorum başarıyla Eklendi');
 
-      setName('');
-      setSurname('');
-      setComment('');
-      setStar(0);
-      setLike(0);
-      console.log('Successful');
-    } catch (error) {
-      toast.error('Yorum eklenirken bir hata oluştu!');
-      console.log(error);
-    }
-  };
+  if (loading || !data) return <Loading />;
 
-  const handleLike = async (commentId: string) => {
-    try {
-      await axios.post(`https://serap.alwaysdata.net/comment/${commentId}/like`);
-      // Yorumları yeniden yükle
-      const updatedComments = await axios.get('https://serap.alwaysdata.net/comment');
-      setDatacomment(updatedComments.data);
-    } catch (error) {
-      console.error('Like error:', error);
-    }
-  };
-
-  if (loading) {
-    return <Loading />
-  }
-
-  if (!data) {
-    return <Loading/>
-  }
-
-  if(!galeriItems){
-    return <Loading/>
-  }
+  const videos = [data.vd1, data.vd2, data.vd3, data.vd4].filter(Boolean);
 
   return (
-    <div className='bgsss font-thin tracking-widest'>
-      <ToastContainer />
-      <section>
-        <div className='text-center text-5xl text-white py-[5rem] max-sm:text-3xl'>
-          <h1>{data.foto}</h1>
-        </div>
-        <div className='flex flex-wrap justify-center pb-[10rem] w-full max-lg:gap-5'>
-          {galeriItems.map((item: GaleriItem) => (
-            <Image
-              key={item._id}
-              src={item.resimUrl}
-              alt="Galeri Resmi"
-              className="pr-3 hover:opacity-60 max-sm:w-[20rem] max-sm:h-[25rem]"
-              width={350}
-              height={350}
-            />
-          ))}
-        </div>
-      </section>
-      <section>
-        <div className='text-center text-5xl text-white py-[5rem] max-sm:text-3xl'>
-          <h1>{data.Videolarımız}</h1>
-        </div>
-        <div className='flex flex-wrap justify-center pb-[5rem] max-lg:gap-5 '>
-          <video src={data.vd1} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
-          <video src={data.vd2} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
-          <video src={data.vd3} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
-          <video src={data.vd4} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
-        </div>
+    <div style={{ background: C.bg, color: C.text, minHeight: '100vh' }}>
+      <Styles />
 
+      {/* ── Galeri Section ── */}
+      <section style={{ padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <SectionTitle>{data.foto}</SectionTitle>
+          <div className="galeri-grid">
+            {galeriItems.map((item) => (
+              <div key={item._id} className="galeri-item">
+                <Image
+                  src={item.resimUrl}
+                  alt="Galeri"
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
-      <div className='mb-[3rem]'>
-        <h1 className='text-5xl text-white text-center'>Yorumlar</h1>
+
+      {/* Ayraç */}
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 2rem', background: C.bg }}>
+        <div style={{ flex: 1, height: '1px', background: C.border }} />
+        <div style={{ margin: '0 1.25rem', width: '6px', height: '6px', background: C.goldDim, border: `1px solid ${C.gold}`, transform: 'rotate(45deg)' }} />
+        <div style={{ flex: 1, height: '1px', background: C.border }} />
       </div>
 
-      <section className='flex justify-center'>
-        <form onSubmit={userComment} className="flex flex-wrap    gap-3 bg-[rgb(30,30,30)] p-3 rounded-md shadow-md ">
-          <div className="w-24">
-            <label htmlFor="inputName" className="text-white text-xs font-semibold block mb-1">Ad:</label>
-            <input
-              type="text"
-              id="inputName"
-              onChange={(e) => { setName(e.target.value) }}
-              className="w-full text-xs p-2 bg-gray-200 text-gray-900 rounded-md border-0 h-8 shadow-sm focus:ring focus:ring-blue-400"
-              placeholder="Ad"
-              required
-            />
-          </div>
-
-          <div className="w-24">
-            <label htmlFor="inputSurname" className="text-white text-xs font-semibold block mb-1">Soyad:</label>
-            <input
-              type="text"
-              id="inputSurname"
-              onChange={(e) => { setSurname(e.target.value) }}
-              className="w-full text-xs p-2 bg-gray-200 text-gray-900 rounded-md border-0 h-8 shadow-sm focus:ring focus:ring-blue-400"
-              placeholder="Soyad"
-              required
-            />
-          </div>
-
-          <div className="w-28">
-            <label htmlFor="inputMessage" className="text-white text-xs font-semibold block mb-1">Yorumunuz:</label>
-            <input
-              id="inputMessage"
-              onChange={(e) => { setComment(e.target.value) }}
-              className="w-full text-xs p-2 bg-gray-200 text-gray-900 rounded-md border-0 shadow-sm h-8 focus:ring focus:ring-blue-400"
-              placeholder="Mesaj..."
-              required
-            />
-
-          </div>
-          <div className='flex flex-col text-white'>
-            <span>5/{star}</span>
-            <button type='button'><CiStar className='w-6 h-6 hover:text-yellow-500' onClick={() => { if (star < 5) setStar(star + 1) }} /></button>
-          </div>
-          <button className="text-white inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 border border-[#aaaa] transition duration-700 ease-in-out hover:border-[#a44246] hover:bg-[#a44246]  dark:border-[#aaaa]     dark:hover:text-slate-50 h-4 font-semilight p-7 w-[5rem]   bg-transparent " type="submit">Gönder</button>
-        </form>
-
-
-
-      </section>
-      <section className="w-full max-w-2xl mx-auto space-y-3 p-3">
-        {datacomment.map((item) => (
-          <div 
-            key={item._id}
-            className="bg-zinc-900 rounded-md p-3 shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-800 hover:border-zinc-700"
-          >
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
-                  {item.name.charAt(0)}
-                </div>
-                <div className="space-y-0.5">
-                  <h3 className="text-white font-semibold text-sm">
-                    {item.name} {item.surname}
-                  </h3>
-                  <div className="flex items-center">
-                    {startveri(item.star)}
-                  </div>
-                </div>
+      {/* ── Video Section ── */}
+      <section style={{ padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <SectionTitle>{data.Videolarımız}</SectionTitle>
+          <div className="video-grid">
+            {videos.map((src, i) => (
+              <div key={i} className="video-wrapper">
+                {/* Üst altın şerit */}
+                <div style={{ height: '2px', background: `linear-gradient(90deg, transparent, ${C.gold}, transparent)` }} />
+                <video src={src} controls style={{ width: '100%', display: 'block', aspectRatio: '9/16', objectFit: 'cover', background: '#000' }} />
               </div>
-              <span className="text-xs text-gray-400">
-                {item.createdAt}
-              </span>
-            </div>
-
-            <div className="text-gray-200 text-xs leading-relaxed mb-2">
-              {item.comment}
-            </div>
-
-            <div className="flex items-center pt-2 border-t border-zinc-800">
-              <div>
-                <button 
-                  onClick={() => handleLike(item._id)} 
-                  className="flex items-center space-x-1 text-white hover:text-red-800 transition-colors duration-200 text-xs"
-                >
-                  <ThumbsUp size={12} />
-                  <span>Beğen {item.like}</span>
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
+
+      <div style={{ height: '3rem' }} />
     </div>
   );
 };

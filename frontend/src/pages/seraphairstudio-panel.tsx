@@ -145,7 +145,7 @@ const Login = () => {
                 </div>
 
                 <div className="mt-6 text-center text-gray-400 text-sm">
-                    © 2025 Serap Hair Studio. Tüm hakları saklıdır.
+                    © 2026 Serap Hair Studio. Tüm hakları saklıdır.
                 </div>
             </div>
         </div>
