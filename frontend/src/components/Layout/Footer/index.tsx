@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-/* ── Tema ──────────────────────────────────────────────────── */
+
 const C = {
   bg:      '#0a0a0a',
   surface: '#111111',
@@ -13,16 +13,16 @@ const C = {
   subtle:  '#9CA3AF',
 } as const;
 
-/* ── Nav Linkleri ──────────────────────────────────────────── */
+
 const NAV_LINKS = [
   { label: 'Anasayfa',  href: '/'          },
-  { label: 'Hizmetler', href: '/Hizmetler' },
-  { label: 'Kurumsal',  href: '/Kurumsal'  },
-  { label: 'Neredeyiz', href: '/Neredeyiz' },
-  { label: 'İletişim',  href: '/iletisim'   },
+  { label: 'Hizmetler', href: '/hizmetler' },
+  { label: 'Kurumsal',  href: '/kurumsal'  },
+  { label: 'Neredeyiz', href: '/neredeyiz' },
+  { label: 'İletişim',  href: '/contact'   },
 ] as const;
 
-/* ── Sosyal Medya Linkleri ─────────────────────────────────── */
+
 const SOCIAL_LINKS = [
   {
     label: 'Instagram',
@@ -56,7 +56,6 @@ const SOCIAL_LINKS = [
   },
 ] as const;
 
-/* ── Styles ────────────────────────────────────────────────── */
 const Styles = (): React.ReactElement => (
   <style>{`
     .footer-nav-link {
@@ -108,7 +107,7 @@ const Styles = (): React.ReactElement => (
   `}</style>
 );
 
-/* ── Logo ──────────────────────────────────────────────────── */
+
 const FooterLogo = (): React.ReactElement => (
   <Link href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
     <div style={{
@@ -130,7 +129,6 @@ const FooterLogo = (): React.ReactElement => (
   </Link>
 );
 
-/* ── Footer Bileşeni ───────────────────────────────────────── */
 const Footer = (): React.ReactElement => (
   <>
     <Styles />
@@ -145,26 +143,25 @@ const Footer = (): React.ReactElement => (
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '3.5rem 1.5rem 2.5rem' }}>
         <div className="footer-inner">
 
-          {/* Logo + Açıklama */}
+    
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
             <FooterLogo />
             <p style={{
               margin: 0, maxWidth: '320px', textAlign: 'center',
               fontSize: '0.8rem', color: C.muted, lineHeight: 1.75, fontWeight: 300,
             }}>
-              Bayrampaşa'nın kalbinde profesyonel saç, manikür ve güzellik hizmetleri.
+              Bayrampaşa&apos;nın kalbinde profesyonel saç, manikür ve güzellik hizmetleri.
               Her detayda özen, her ziyarette fark.
             </p>
           </div>
 
-          {/* Ayraç */}
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', maxWidth: '500px', gap: '1rem' }}>
             <div style={{ flex: 1, height: '1px', background: C.border }} />
             <div style={{ width: '5px', height: '5px', background: C.goldDim, border: `1px solid ${C.gold}`, transform: 'rotate(45deg)', flexShrink: 0 }} />
             <div style={{ flex: 1, height: '1px', background: C.border }} />
           </div>
 
-          {/* Nav Linkleri */}
+  
           <nav className="footer-nav-row">
             {NAV_LINKS.map(link => (
               <Link key={link.href} href={link.href} className="footer-nav-link">
@@ -173,7 +170,7 @@ const Footer = (): React.ReactElement => (
             ))}
           </nav>
 
-          {/* Sosyal Medya */}
+       
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
             {SOCIAL_LINKS.map(s => (
               <a
@@ -189,7 +186,7 @@ const Footer = (): React.ReactElement => (
             ))}
           </div>
 
-          {/* Alt bilgi */}
+
           <div style={{
             borderTop: `1px solid ${C.border}`,
             paddingTop: '1.5rem',
