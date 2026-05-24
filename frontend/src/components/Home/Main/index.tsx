@@ -178,6 +178,7 @@ const Anasayfa: React.FC = () => {
           <h1>{data.Videolarımız}</h1>
         </div>
         <div className='flex flex-wrap justify-center pb-[5rem] max-lg:gap-5 '>
+          <h1>deneme</h1>
           <video src={data.vd1} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
           <video src={data.vd2} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
           <video src={data.vd3} className='pr-3 max-sm:w-[20rem] max-sm:h-[30rem]' width={350} height={0} controls></video>
