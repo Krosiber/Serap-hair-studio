@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let isConnected = false; // Bağlantı durumunu takip etmek için
+let isConnected = false; 
 
 export const connectDB = async () => {
   if (isConnected) {

@@ -21,14 +21,14 @@ app.use(cors({
 }));
 app.use(express.json())
 
-// Routes
+
 app.use(apiRoutes)
 app.use('/uploads', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 }, express.static('public/uploads'));
 
-// MongoDB bağlantısı
+
 connectDB()
 
 const PORT:any = process.env.PORT || 3000;

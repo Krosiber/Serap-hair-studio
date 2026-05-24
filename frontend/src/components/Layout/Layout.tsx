@@ -10,7 +10,7 @@ import Footer from "../../components/Layout/Footer";
 interface LayoutProps {
   children: React.ReactNode;
 }
-  
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
